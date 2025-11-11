@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import { connectDB } from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
+import employeeRoutes from "./routes/employeeRoutes.js";
 
 dotenv.config();
 
@@ -22,6 +24,9 @@ app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 app.get("/health", (req, res) => {
   return res.json({ ok: true });
 });
+
+app.use("/api/auth", authRoutes);
+app.use("/api/employees", employeeRoutes);
 
 const port = process.env.PORT || 5000;
 
